@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Royalwin Casino</title>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<style>
+  :root{
+    --bg:#0d0d0f;
+    --bg-card:#17171b;
+    --bg-card-2:#1e1e23;
+    --gold:#d4af5a;
+    --gold-light:#f4e2a6;
+    --gold-dark:#9c7a2e;
+    --text:#eae7dd;
+    --text-dim:#8b8a86;
+    --accent-green:#3ecf6a;
+    --accent-red:#e0473e;
+    --border:#2a2a30;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--bg); color:var(--text); font-family:'Segoe UI',Tahoma,Arial,sans-serif; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  body{max-width:480px; margin:0 auto; position:relative; padding-bottom:64px; overflow-x:hidden;}
+
+  /* ===== Header ===== */
+  header.topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 14px; background:var(--bg);
+  }
+  .brand{display:flex; align-items:center; gap:8px;}
+  .brand-badge{
+    width:34px; height:34px; border-radius:50%;
+    border:1.5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:Georgia,serif; font-weight:700; color:var(--gold-light); font-size:13px;
+    background:radial-gradient(circle at 30% 30%, #2a2417, #14120a);
+    flex-shrink:0;
+  }
+  .brand-text{line-height:1.1;}
+  .brand-text .name{font-family:Georgia,serif; font-weight:700; letter-spacing:1px; color:var(--gold-light); font-size:15px;}
+  .brand-text .domain{font-size:9px; color:var(--text-dim); letter-spacing:1px;}
+  .search-icon{
+    width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--border); color:var(--text-dim); font-size:14px;
+  }
+
+  /* ===== Ticker banner (confetti strip) ===== */
+  .confetti-strip{height:34px; overflow:hidden; position:relative; background:linear-gradient(180deg,#161016,#0d0d0f);}
+  .confetti-strip lottie-player{position:absolute; top:-8px; left:50%; transform:translateX(-50%); width:220px; height:60px;}
+
+  /* ===== Hero banner ===== */
+  .hero{
+    margin:6px 12px 0; border-radius:14px; overflow:hidden; position:relative;
+    background:linear-gradient(180deg,#241c0a 0%, #1c1610 55%, #14100a 100%);
+    border:1px solid #4a3d1c;
+    min-height:210px; padding:14px 10px 0;
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0; pointer-events:none; opacity:0.5;
+    background-image:
+      radial-gradient(circle, #d4af5a 1.5px, transparent 1.5px),
+      radial-gradient(circle, #f4e2a6 1px, transparent 1px);
+    background-size: 46px 46px, 30px 30px;
+    background-position: 0 0, 15px 20px;
+  }
+  .hero-crest{
+    display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:6px; position:relative; z-index:2;
+  }
+  .hero-crest .brand-badge{width:24px; height:24px; font-size:9px;}
+  .hero-crest span{font-family:Georgia,serif; color:var(--gold-light); font-size:10px; letter-spacing:2px;}
+  .hero h1{
+    font-family:Georgia,serif; font-size:22px; line-height:1.35; color:var(--gold-light);
+    letter-spacing:1px; position:relative; z-index:2; text-shadow:0 2px 6px rgba(0,0,0,0.6);
+  }
+  .hero p.tag{
+    margin-top:8px; font-size:10.5px; color:#e8dcc0; background:rgba(0,0,0,0.4);
+    display:inline-block; padding:5px 12px; border-radius:20px; border:1px solid #4a3d1c;
+    position:relative; z-index:2; max-width:88%;
+  }
+  .hero-figures{
+    position:relative; width:100%; height:110px; margin-top:6px; z-index:1;
+  }
+  .hero-woman{
+    position:absolute; left:-6px; bottom:0; height:100%; width:auto;
+    -webkit-mask-image:linear-gradient(to bottom, black 78%, transparent 100%);
+            mask-image:linear-gradient(to bottom, black 78%, transparent 100%);
+    filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+    border-radius:8px;
+  }
+  .hero-horse{
+    position:absolute; right:-8px; bottom:0; height:98%; width:auto;
+    -webkit-mask-image:linear-gradient(to bottom, black 78%, transparent 100%);
+            mask-image:linear-gradient(to bottom, black 78%, transparent 100%);
+    filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5)) sepia(15%) saturate(140%);
+    border-radius:8px;
+  }
+  .hero-deco{
+    position:absolute; left:50%; top:2px; transform:translateX(-50%); width:70px; height:70px; opacity:0.85; z-index:2;
+  }
+
+  /* ===== Prize record ticker ===== */
+  .prize-section{margin:16px 0 4px;}
+  .prize-title{text-align:center; font-size:13px; color:#cfcac0; letter-spacing:1px; margin-bottom:10px; font-weight:600;}
+  .prize-track{display:flex; gap:8px; overflow-x:hidden; padding:0 12px;}
+  .prize-card{
+    flex:0 0 auto; width:31%; background:var(--bg-card); border-radius:10px; padding:6px;
+    display:flex; gap:6px; align-items:center; border:1px solid var(--border);
+  }
+  .prize-thumb{
+    width:34px; height:34px; border-radius:6px; flex-shrink:0;
+    background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));
+    display:flex; align-items:center; justify-content:center; font-size:14px; color:#241c07;
+  }
+  .prize-info{font-size:10px; line-height:1.4; overflow:hidden;}
+  .prize-info .who{color:var(--accent-green); font-weight:600;}
+  .prize-info .win{color:var(--text-dim);}
+  .prize-info .win b{color:var(--gold-light);}
+
+  /* ===== Notification marquee ===== */
+  .notice-bar{
+    margin:14px 12px 0; background:var(--bg-card); border-radius:10px; border:1px solid var(--border);
+    display:flex; align-items:center; gap:8px; padding:8px 12px; position:relative;
+  }
+  .notice-bar .bell{color:var(--gold); font-size:14px;}
+  .notice-marquee{flex:1; overflow:hidden; white-space:nowrap; position:relative; height:16px;}
+  .notice-marquee span{
+    position:absolute; left:100%; color:var(--gold-light); font-size:12px; font-weight:600;
+    animation:marquee 14s linear infinite;
+  }
+  @keyframes marquee{ from{left:100%;} to{left:-220%;} }
+  .notice-mail{
+    position:relative; color:var(--text-dim); font-size:16px;
+  }
+  .notice-mail .badge{
+    position:absolute; top:-6px; right:-6px; background:var(--accent-red); color:#fff; font-size:9px;
+    width:15px; height:15px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ===== Auth buttons + quick actions ===== */
+  .auth-row{display:flex; gap:10px; margin:14px 12px 0;}
+  .btn{flex:1; text-align:center; padding:10px 0; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer;}
+  .btn-login{border:1px solid var(--gold); color:var(--gold-light); background:transparent;}
+  .btn-register{background:linear-gradient(135deg,var(--gold-light),var(--gold-dark)); color:#241c07;}
+
+  .quick-actions{display:flex; justify-content:space-between; margin:16px 14px 4px;}
+  .qa-item{display:flex; flex-direction:column; align-items:center; gap:6px; font-size:10px; color:var(--text-dim); flex:1;}
+  .qa-icon{
+    width:38px; height:38px; border-radius:10px; background:var(--bg-card); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--gold);
+  }
+
+  /* ===== Main layout: sidebar + content ===== */
+  .layout{display:flex; margin-top:12px;}
+  .sidebar{
+    width:64px; flex-shrink:0; background:var(--bg); border-right:1px solid var(--border);
+    position:sticky; top:0; align-self:flex-start; height:calc(100vh - 20px); overflow-y:auto;
+    scrollbar-width:none;
+  }
+  .sidebar::-webkit-scrollbar{display:none;}
+  .side-item{
+    display:flex; flex-direction:column; align-items:center; gap:4px; padding:12px 2px;
+    font-size:9px; color:var(--text-dim); cursor:pointer; border-left:2px solid transparent;
+  }
+  .side-item .ic{font-size:17px;}
+  .side-item.active{color:var(--gold-light); background:var(--bg-card); border-left:2px solid var(--gold);}
+
+  .content{flex:1; min-width:0; padding:0 10px;}
+
+  /* ===== Section tabs (Hot/Recent/Favorites) ===== */
+  .tabs{display:flex; gap:18px; padding:4px 4px 10px; border-bottom:1px solid var(--border); margin-bottom:10px;}
+  .tab{font-size:13px; color:var(--text-dim); font-weight:600; padding-bottom:8px; position:relative;}
+  .tab.active{color:var(--gold-light);}
+  .tab.active::after{content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--gold);}
+
+  .section-heading{
+    display:flex; align-items:center; justify-content:space-between; padding:14px 4px 10px; scroll-margin-top:10px;
+  }
+  .section-heading h2{font-size:15px; font-weight:600; display:flex; align-items:center; gap:6px;}
+  .section-heading .all{font-size:11px; color:var(--text-dim);}
+
+  .game-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; padding:0 4px;}
+  .game-card{background:var(--bg-card); border-radius:10px; overflow:hidden; border:1px solid var(--border); position:relative;}
+  .game-thumb{
+    aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; font-size:26px;
+    position:relative; overflow:hidden;
+  }
+  .game-thumb .provider{
+    position:absolute; top:4px; left:4px; font-size:8px; font-weight:700; padding:1px 5px; border-radius:4px;
+    background:rgba(0,0,0,0.55); color:var(--gold-light);
+  }
+  .game-thumb .like{position:absolute; top:4px; right:4px; font-size:11px; color:var(--gold-light);}
+  .game-name{font-size:10.5px; text-align:center; padding:6px 4px; color:var(--text); line-height:1.3;}
+
+  .expand-more{text-align:center; font-size:12px; color:var(--gold); padding:10px 0 4px; cursor:pointer;}
+
+  .wide-card{
+    background:var(--bg-card); border-radius:12px; overflow:hidden; border:1px solid var(--border);
+    display:flex; align-items:stretch; margin:0 4px 10px; height:78px;
+  }
+  .wide-card .wide-info{flex:1; display:flex; flex-direction:column; justify-content:center; padding:0 14px;}
+  .wide-card .wide-info .provider-name{font-size:9px; color:var(--gold); font-weight:700; letter-spacing:1px;}
+  .wide-card .wide-info .title{font-size:14px; font-weight:600; margin-top:2px;}
+  .wide-card .wide-visual{
+    width:96px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:30px;
+  }
+
+  /* ===== Footer ===== */
+  footer{margin-top:24px; padding:20px 16px 10px; border-top:1px solid var(--border);}
+  .footer-cols{display:flex; justify-content:space-between; gap:10px; margin-bottom:20px;}
+  .footer-col h4{font-size:12px; color:var(--text-dim); margin-bottom:10px; font-weight:600;}
+  .footer-col a{display:block; font-size:11.5px; color:#b7b5ad; margin-bottom:8px;}
+  .official-channel{font-size:11px; color:var(--text-dim); margin-bottom:8px;}
+  .telegram-btn{
+    width:34px; height:34px; border-radius:50%; background:#229ED9; color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:16px; margin-bottom:18px;
+  }
+  .about-text{font-size:11px; line-height:1.7; color:var(--gold-light); background:rgba(212,175,90,0.06); padding:12px; border-radius:8px; border:1px solid #3a3118;}
+  .provider-logos{display:flex; flex-wrap:wrap; gap:14px; margin:16px 0; align-items:center;}
+  .provider-logos span{font-size:11px; font-weight:700; color:var(--text-dim); border:1px solid var(--border); padding:4px 10px; border-radius:6px;}
+  .copyright{font-size:10px; color:#5c5b57; text-align:center; padding-top:10px; border-top:1px solid var(--border);}
+
+  /* ===== Bottom nav ===== */
+  .bottom-nav{
+    position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px;
+    background:#121214; border-top:1px solid var(--border); display:flex; z-index:50;
+  }
+  .bn-item{flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; padding:8px 0 10px; font-size:10px; color:var(--text-dim);}
+  .bn-item.active{color:var(--gold-light);}
+  .bn-icon{font-size:18px;}
+  .bn-item.center{position:relative; top:-10px;}
+  .bn-item.center .bn-icon{
+    width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));
+    color:#241c07; display:flex; align-items:center; justify-content:center; font-size:20px;
+    box-shadow:0 2px 10px rgba(212,175,90,0.4);
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-badge">RW</div>
+      <div class="brand-text">
+        <div class="name">ROYALWIN</div>
+        <div class="domain">ROYALWIN.COM</div>
+      </div>
+    </div>
+    <div class="search-icon">&#128269;</div>
+  </header>
+
+  <div class="confetti-strip">
+    <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json" background="transparent" speed="1" loop autoplay></lottie-player>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-crest">
+      <div class="brand-badge">RW</div>
+      <span>ROYALWIN ENTERTAINMENT</span>
+    </div>
+    <h1>ROYALWIN<br>GRAND LAUNCH</h1>
+    <p class="tag">New version, new promotions, ultra-clear game graphics</p>
+    <div class="hero-figures">
+      <img class="hero-woman" src="https://images.pexels.com/photos/19271523/pexels-photo-19271523.jpeg?auto=compress&cs=tinysrgb&w=500" alt="">
+      <img class="hero-horse" src="https://images.pexels.com/photos/9609886/pexels-photo-9609886.jpeg?auto=compress&cs=tinysrgb&w=500" alt="">
+      <lottie-player class="hero-deco" src="https://assets9.lottiefiles.com/packages/lf20_bpqri9y8.json" background="transparent" speed="1" loop autoplay></lottie-player>
+    </div>
+  </div>
+
+  <!-- PRIZE RECORD -->
+  <div class="prize-section">
+    <div class="prize-title">Grand Prize Record</div>
+    <div class="prize-track" id="prizeTrack">
+      <div class="prize-card"><div class="prize-thumb">&#127920;</div><div class="prize-info"><div class="who">Congrats 4***06</div><div class="win">win <b>48,372.7</b></div></div></div>
+      <div class="prize-card"><div class="prize-thumb">&#128142;</div><div class="prize-info"><div class="who">Congrats 6***78</div><div class="win">win <b>82,366.7</b></div></div></div>
+      <div class="prize-card"><div class="prize-thumb">&#127942;</div><div class="prize-info"><div class="who">Congrats 8***99</div><div class="win">win <b>83,475.3</b></div></div></div>
+    </div>
+  </div>
+
+  <!-- NOTICE BAR -->
+  <div class="notice-bar">
+    <span class="bell">&#128266;</span>
+    <div class="notice-marquee"><span>Brand new agent model, seize new opportunities and grow with Royalwin</span></div>
+    <div class="notice-mail">&#9993;<span class="badge">3</span></div>
+  </div>
+
+  <!-- AUTH -->
+  <div class="auth-row">
+    <div class="btn btn-login">Login</div>
+    <div class="btn btn-register">Register</div>
+  </div>
+
+  <!-- QUICK ACTIONS -->
+  <div class="quick-actions">
+    <div class="qa-item"><div class="qa-icon">&#128241;</div>APP Download</div>
+    <div class="qa-item"><div class="qa-icon">&#128101;</div>Invite</div>
+    <div class="qa-item"><div class="qa-icon">&#127911;</div>Support</div>
+    <div class="qa-item"><div class="qa-icon">&#8942;</div>More</div>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+    <nav class="sidebar" id="sidebar">
+      <div class="side-item active" data-target="sec-hot"><span class="ic">&#128293;</span>Hot</div>
+      <div class="side-item" data-target="sec-slot"><span class="ic">&#127920;</span>Slot</div>
+      <div class="side-item" data-target="sec-sports"><span class="ic">&#9917;</span>Sports</div>
+      <div class="side-item" data-target="sec-live"><span class="ic">&#127909;</span>Live</div>
+      <div class="side-item" data-target="sec-fishing"><span class="ic">&#127907;</span>Fishing</div>
+      <div class="side-item" data-target="sec-cards"><span class="ic">&#127183;</span>Cards</div>
+      <div class="side-item" data-target="sec-lottery"><span class="ic">&#127920;</span>Lottery</div>
+      <div class="side-item" data-target="sec-mini"><span class="ic">&#127920;</span>Mini Games</div>
+      <div class="side-item" data-target="sec-demo"><span class="ic">&#127918;</span>Demo</div>
+    </nav>
+
+    <div class="content" id="content">
+      <div class="tabs">
+        <div class="tab active">Hot</div>
+        <div class="tab">Recent</div>
+        <div class="tab">Favorites</div>
+      </div>
+
+      <!-- HOT -->
+      <div class="section-heading" id="sec-hot"><h2>&#128293; Hot</h2></div>
+      <div class="game-grid">
+        <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,#3a2c0e,#1c1508);">&#127924;<span class="provider">PG</span><span class="like">&#128077;</span></div><div class="game-name">Mahjong Ways</div></div>
+        <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,#3a1c1c,#1c0e0e);">&#128119;<span class="provider">PG</span><span class="like">&#128077;</span></div><div class="game-name">Wild Bounty Showdown</div></div>
+        <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,#1c3a1c,#0e1c0e);">&#127807;<span class="provider">PG</span><span class="like">&#128077;</span></div><div class="game-name">Mahjong Ways 2</div></div>
+        <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,#3a1c30,#1c0e17);">&#128105;<span class="provider">LIVE</span></div><div class="game-name">Royal Live</div></div>
+        <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,#2a1c3a,#150e1c);">&#128081;</div><div class="game-name">Super Royal Deluxe</div></div>
+        <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,#3a2c1c,#1c150e);">&#128176;</div><div class="game-name">Treasures of Aztec</div></div>
+        <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,#3a1c1c,#1c0e0e);">&#128009;</div><div class="game-name">Ways of the Qilin</div></div>
+        <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,#1c2a3a,#0e151c);">&#9917;</div><div class="game-name">Shaolin Soccer</div></div>
+        <div class="game-card"><div class="game-thumb" style="background:linear-gradient(135deg,#3a3018,#1c170c);">&#128008;</div><div class="game-name">Lucky Neko</div></div>
+      </div>
+      <div class="expand-more">74 more game(s) Expand &#8964;</div>
+
+      <!-- SLOT -->
+      <div class="section-heading" id="sec-slot"><h2>&#127920; Slot</h2><span class="all">All</span></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">PG</div><div class="title">PG Slots</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a2c0e,#1c1508);">&#9824;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">PP</div><div class="title">PP Slots</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#1c2a1c,#0d150d);">&#127942;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">JDB</div><div class="title">JDB Slots</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a1c1c,#1c0e0e);">&#128081;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">CQ9</div><div class="title">CQ9 Slots</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#1c2a3a,#0d151c);">&#128009;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">WG</div><div class="title">WG Slots</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a3018,#1c170c);">&#128176;</div></div>
+
+      <!-- SPORTS -->
+      <div class="section-heading" id="sec-sports"><h2>&#9917; Sports</h2><span class="all">All</span></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">CROWN SPORTS</div><div class="title">Royal Sports 2026</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#1c2a3a,#0d151c);">&#9917;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">IM SPORTS</div><div class="title">IM Sports</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a1c1c,#1c0e0e);">&#9917;</div></div>
+
+      <!-- LIVE -->
+      <div class="section-heading" id="sec-live"><h2>&#127909; Live</h2><span class="all">All</span></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">ROYAL LIVE</div><div class="title">Royal Live Casino</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a1c30,#1c0e17);">&#128105;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">CHOICE</div><div class="title">Choice Live</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#2a1c3a,#150e1c);">&#128105;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">BBIN</div><div class="title">BBIN Live</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#1c2a3a,#0d151c);">&#128105;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">PP</div><div class="title">PP Live</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#1c2a1c,#0d150d);">&#128105;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">EVO</div><div class="title">EVO Live</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a1c1c,#1c0e0e);">&#128105;</div></div>
+
+      <!-- FISHING -->
+      <div class="section-heading" id="sec-fishing"><h2>&#127907; Fishing</h2><span class="all">All</span></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">WG</div><div class="title">WG Fishing</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#0e2a3a,#081820);">&#128011;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">JDB</div><div class="title">JDB Fishing</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#0e2a3a,#081820);">&#128011;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">JILI</div><div class="title">JILI Fishing</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a1c1c,#1c0e0e);">&#127991;&#65039;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">CQ9</div><div class="title">CQ9 Fishing</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a3018,#1c170c);">&#128031;</div></div>
+
+      <!-- CARDS -->
+      <div class="section-heading" id="sec-cards"><h2>&#127183; Cards</h2><span class="all">All</span></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">KY</div><div class="title">KY Cards</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a1c1c,#1c0e0e);">&#127183;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">WG</div><div class="title">WG Cards</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a3018,#1c170c);">&#127185;</div></div>
+
+      <!-- LOTTERY -->
+      <div class="section-heading" id="sec-lottery"><h2>&#127920; Lottery</h2><span class="all">All</span></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">BBIN</div><div class="title">BBIN Lottery</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#3a1c1c,#1c0e0e);">&#127903;&#65039;</div></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">WG</div><div class="title">WG Lottery</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#0e2a1c,#08200f);">&#128204;</div></div>
+
+      <!-- MINI GAMES -->
+      <div class="section-heading" id="sec-mini"><h2>&#128260; Mini Games</h2><span class="all">All</span></div>
+      <div class="wide-card"><div class="wide-info"><div class="provider-name">WG</div><div class="title">WG Blockchain Games</div></div><div class="wide-visual" style="background:linear-gradient(135deg,#0e2a3a,#081820);">&#128640;</div></div>
+
+      <div class="section-heading" id="sec-demo"><h2>&#127918; Demo</h2></div>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4>Casino</h4>
+            <a href="#">Rebate</a>
+            <a href="#">Unclaimed</a>
+            <a href="#">VIP</a>
+            <a href="#">Invite</a>
+          </div>
+          <div class="footer-col">
+            <h4>Games</h4>
+            <a href="#">Hot</a>
+            <a href="#">Slot</a>
+            <a href="#">Sports</a>
+            <a href="#">Live</a>
+          </div>
+          <div class="footer-col">
+            <h4>Support</h4>
+            <a href="#">Online Support</a>
+            <a href="#">Help Center</a>
+          </div>
+        </div>
+        <div class="official-channel">Official Channel</div>
+        <div class="telegram-btn">&#9992;&#65039;</div>
+        <div class="about-text">
+          Royalwin Entertainment is the official direct-operated comprehensive entertainment platform of Royalwin Group, providing exciting and fun real-life video, electronics, chess and card, fishing, lottery, sports and other games in all categories. The company is committed to fairness, transparency, and building the most trusted entertainment platform in the region.
+        </div>
+        <div class="provider-logos">
+          <span>PG</span><span>FC</span><span>JDB</span><span>CQ9</span><span>WG</span>
+        </div>
+        <div class="copyright">24-hour support: @ROYALWINSUPPORT | Royalwin Entertainment &#169; Copyright 2024-2026</div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <div class="bn-item active"><span class="bn-icon">&#127968;</span>Home</div>
+    <div class="bn-item"><span class="bn-icon">&#127873;</span>Promo</div>
+    <div class="bn-item center"><span class="bn-icon">&#128273;</span></div>
+    <div class="bn-item"><span class="bn-icon">&#9997;&#65039;</span>Register</div>
+    <div class="bn-item"><span class="bn-icon">&#128100;</span>Profile</div>
+  </nav>
+
+<script>
+  // Sidebar sticky-active on scroll
+  const sideItems = document.querySelectorAll('.side-item');
+  const sections = Array.from(sideItems).map(i => document.getElementById(i.dataset.target));
+  const content = document.getElementById('content');
+
+  sideItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const target = document.getElementById(item.dataset.target);
+      if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  function onScroll(){
+    let currentIndex = 0;
+    sections.forEach((sec, idx) => {
+      if (sec && sec.getBoundingClientRect().top - 80 <= 0) currentIndex = idx;
+    });
+    sideItems.forEach((it, idx) => it.classList.toggle('active', idx === currentIndex));
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Prize ticker auto-rotate
+  const prizePool = [
+    ["Congrats 4***06","48,372.7"],["Congrats 6***78","82,366.7"],["Congrats 8***99","83,475.3"],
+    ["Congrats 2***25","19,613.4"],["Congrats 9***58","301x"],["Congrats 3***27","36,538.2"],
+    ["Congrats 5***55","37,899.2"],["Congrats 7***12","67,082.3"],["Congrats 1***60","305x"]
+  ];
+  let pIdx = 0;
+  const track = document.getElementById('prizeTrack');
+  function rotatePrizes(){
+    const cards = track.children;
+    for (let i=0;i<3;i++){
+      const [who, win] = prizePool[(pIdx + i) % prizePool.length];
+      cards[i].querySelector('.who').textContent = who;
+      cards[i].querySelector('.win').innerHTML = 'win <b>' + win + '</b>';
+    }
+    pIdx = (pIdx + 3) % prizePool.length;
+  }
+  setInterval(rotatePrizes, 2500);
+</script>
+</body>
+</html>
